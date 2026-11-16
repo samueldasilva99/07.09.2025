@@ -1,119 +1,769 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Para vos ♥ — Un regalo hecho con amor</title>
+
 <style>
-:root{--bg:#402236;--accent:#f1a0bd;--fg:#fff8fb;--sub:#f1dbe5}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--fg);background:radial-gradient(ellipse at top,var(--bg),#100d13 75%);line-height:1.6}
-main{max-width:780px;margin:auto;padding:22px 16px 65px}.hero{text-align:center;padding:26px 8px 32px}.eyebrow{color:var(--accent);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase}.hero h1{font:clamp(2.5rem,9vw,5rem)/1.02 Georgia,serif;margin:15px 0;letter-spacing:-.04em}.hero p{color:var(--sub);margin:0}.cover{display:none;width:100%;max-height:70vh;object-fit:cover;border-radius:22px;box-shadow:0 20px 50px #0005}.card{background:#ffffff0a;border:1px solid #ffffff20;border-radius:20px;padding:22px;margin-top:17px;backdrop-filter:blur(10px)}.card h2{font:1.8rem Georgia,serif;margin:0 0 10px}.story{white-space:pre-wrap;color:var(--sub);line-height:1.9}.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.gallery img,.gallery video {
-    width:100%;
-    aspect-ratio:4 / 5;
-    height:auto;
-    object-fit:cover;
-}.gallery video{object-fit:contain}.media{margin-top:12px}.media audio{width:100%}.media a{color:var(--accent)}.button{display:block;width:100%;padding:13px 16px;border:0;border-radius:12px;background:var(--accent);color:#26121d;font-weight:850;font-size:1rem;margin-top:12px;cursor:pointer}.button:disabled{opacity:.4;cursor:not-allowed}.progress{height:6px;background:#ffffff20;border-radius:99px;overflow:hidden;margin:15px 0}.progress div{height:100%;width:0;background:var(--accent);transition:width .25s}.question{padding:16px 0;border-top:1px solid #ffffff1a}.question:first-child{border-top:0}.question p{font-weight:750;margin:0 0 12px}.answers{display:grid;gap:8px}.answer{display:flex;gap:10px;align-items:flex-start;background:#ffffff0a;border:1px solid #ffffff24;border-radius:12px;padding:11px;cursor:pointer}.answer:has(input:checked){border-color:var(--accent);background:#f1a0bd20}.answer input{margin-top:5px;accent-color:var(--accent)}.feedback{font-size:.88rem;color:var(--sub);margin-top:8px}.hidden{display:none!important}.prize{text-align:center;padding:28px 12px}.prize .emoji{font-size:4rem}.prize h2{font-size:2.2rem;color:var(--accent)}.footer{text-align:center;color:#b9a5b3;font-size:.78rem;padding:25px 5px}.badge{display:inline-block;border:1px solid #ffffff25;padding:5px 11px;border-radius:99px;font-size:.78rem;color:var(--sub)}@media(max-width:500px){.gallery{grid-template-columns:1fr}.gallery img,.gallery video{height:auto;max-height:65vh}.card{padding:18px}}
+:root {
+    --bg: #402236;
+    --accent: #f1a0bd;
+    --fg: #fff8fb;
+    --sub: #f1dbe5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+    color: var(--fg);
+    background: radial-gradient(ellipse at top, var(--bg), #100d13 75%);
+    line-height: 1.6;
+}
+
+main {
+    max-width: 780px;
+    margin: auto;
+    padding: 22px 16px 65px;
+}
+
+.hero {
+    text-align: center;
+    padding: 26px 8px 32px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: .75rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font: clamp(2.5rem, 9vw, 5rem)/1.02 Georgia, serif;
+    margin: 15px 0;
+    letter-spacing: -.04em;
+}
+
+.hero p { color: var(--sub); margin: 0; }
+
+.cover {
+    display: none;
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 20px 50px #0005;
+}
+
+.card {
+    background: #ffffff0a;
+    border: 1px solid #ffffff20;
+    border-radius: 20px;
+    padding: 22px;
+    margin-top: 17px;
+    backdrop-filter: blur(10px);
+}
+
+.card h2 {
+    font: 1.8rem Georgia, serif;
+    margin: 0 0 10px;
+}
+
+.story {
+    white-space: pre-wrap;
+    color: var(--sub);
+    line-height: 1.9;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.gallery img, .gallery video {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.gallery video { object-fit: contain; }
+
+.gallery img.image-error {
+    object-fit: contain;
+    background: #ffffff12;
+    border: 1px solid #f1a0bd;
+}
+
+.media { margin-top: 12px; }
+.media audio { width: 100%; }
+.media a { color: var(--accent); }
+
+.button {
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #26121d;
+    font-weight: 850;
+    font-size: 1rem;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+.button:disabled { opacity: .4; cursor: not-allowed; }
+
+.progress {
+    height: 6px;
+    background: #ffffff20;
+    border-radius: 99px;
+    overflow: hidden;
+    margin: 15px 0;
+}
+
+.progress div {
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width .25s;
+}
+
+.question {
+    padding: 16px 0;
+    border-top: 1px solid #ffffff1a;
+}
+
+.question:first-child { border-top: 0; }
+.question p { font-weight: 750; margin: 0 0 12px; }
+
+.answers { display: grid; gap: 8px; }
+
+.answer {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: #ffffff0a;
+    border: 1px solid #ffffff24;
+    border-radius: 12px;
+    padding: 11px;
+    cursor: pointer;
+}
+
+.answer:has(input:checked) {
+    border-color: var(--accent);
+    background: #f1a0bd20;
+}
+
+.answer input {
+    margin-top: 5px;
+    accent-color: var(--accent);
+}
+
+.feedback {
+    font-size: .88rem;
+    color: var(--sub);
+    margin-top: 8px;
+}
+
+.hidden { display: none !important; }
+
+.prize {
+    text-align: center;
+    padding: 28px 12px;
+}
+
+.prize .emoji { font-size: 4rem; }
+
+.prize h2 {
+    font-size: 2.2rem;
+    color: var(--accent);
+}
+
+.footer {
+    text-align: center;
+    color: #b9a5b3;
+    font-size: .78rem;
+    padding: 25px 5px;
+}
+
+.badge {
+    display: inline-block;
+    border: 1px solid #ffffff25;
+    padding: 5px 11px;
+    border-radius: 99px;
+    font-size: .78rem;
+    color: var(--sub);
+}
+
+@media(max-width:500px) {
+    .gallery { grid-template-columns: 1fr; }
+
+    .gallery img, .gallery video {
+        height: auto;
+        max-height: 65vh;
+    }
+
+    .card { padding: 18px; }
+}
 </style>
 </head>
-<body><main>
-<section class="hero"><div class="eyebrow">07/09/2025 - ∞</div><h1 id="mainTitle">Un pequeño viaje<br>por nuestros recuerdos</h1><p id="subtitle">Preparé algo especial para vos. ❤️</p><div style="margin-top:15px"><span class="badge" id="toBadge">Solo para vos</span></div></section>
+
+<body>
+<main>
+
+<section class="hero">
+    <div class="eyebrow">07/09/2025 - ∞</div>
+
+    <h1 id="mainTitle">
+        Un pequeño viaje<br>por nuestros recuerdos
+    </h1>
+
+    <p id="subtitle">Preparé algo especial para vos. ❤️</p>
+
+    <div style="margin-top:15px">
+        <span class="badge" id="toBadge">Solo para vos</span>
+    </div>
+</section>
+
 <img id="cover" class="cover" alt="Nuestro recuerdo">
-<section class="card" id="messageCard"><h2 id="messageTitle">Antes de empezar…</h2><div class="story" id="message">Hay recuerdos que merecen volver a vivirse.</div></section>
-<section class="card hidden" id="audioCard"><h2>🎧 Unas pequeñas palabras</h2><div class="media" id="audioArea"></div></section>
-<section class="card hidden" id="videoCard"><h2>🎬 Momentos juntos</h2><div class="gallery" id="videoGallery"></div></section>
-<section class="card hidden" id="photoCard"><h2>📸 Nuestra historia en fotos</h2><div class="gallery" id="photoGallery"></div></section>
-<section class="card hidden" id="quizCard"><h2 id="quizTitle">¿Cuánto te acordás?</h2><p id="quizIntro" class="story">Respondé estas preguntas para descubrir tu sorpresa.</p><div class="progress"><div id="progressBar"></div></div><div id="questions"></div><button class="button" id="checkAnswers">Descubrir mi premio ♥</button><div id="quizFeedback" class="feedback" aria-live="polite"></div></section>
-<section class="card hidden" id="prizeCard"><div class="prize"><div class="emoji" id="prizeEmoji">🎁</div><h2 id="prizeTitle">¡Tu premio!</h2><div class="story" id="prizeText"></div><div id="prizeMedia"></div><button class="button hidden" id="prizeLink">Ver mi sorpresa</button></div></section>
-<div class="footer">Volvé a abrir esta página cuando quieras. ♥</div>
+
+<section class="card" id="messageCard">
+    <h2 id="messageTitle">Antes de empezar…</h2>
+    <div class="story" id="message">
+        Hay recuerdos que merecen volver a vivirse.
+    </div>
+</section>
+
+<section class="card hidden" id="audioCard">
+    <h2>🎧 Unas pequeñas palabras</h2>
+    <div class="media" id="audioArea"></div>
+</section>
+
+<section class="card hidden" id="videoCard">
+    <h2>🎬 Momentos juntos</h2>
+    <div class="gallery" id="videoGallery"></div>
+</section>
+
+<section class="card hidden" id="photoCard">
+    <h2>📸 Nuestra historia en fotos</h2>
+    <div class="gallery" id="photoGallery"></div>
+</section>
+
+<section class="card hidden" id="quizCard">
+    <h2 id="quizTitle">¿Cuánto te acordás?</h2>
+
+    <p id="quizIntro" class="story">
+        Respondé estas preguntas para descubrir tu sorpresa.
+    </p>
+
+    <div class="progress">
+        <div id="progressBar"></div>
+    </div>
+
+    <div id="questions"></div>
+
+    <button class="button" id="checkAnswers">
+        Descubrir mi premio ♥
+    </button>
+
+    <div id="quizFeedback" class="feedback" aria-live="polite"></div>
+</section>
+
+<section class="card hidden" id="prizeCard">
+    <div class="prize">
+        <div class="emoji" id="prizeEmoji">🎁</div>
+        <h2 id="prizeTitle">¡Tu premio!</h2>
+
+        <div class="story" id="prizeText"></div>
+        <div id="prizeMedia"></div>
+
+        <button class="button hidden" id="prizeLink">
+            Ver mi sorpresa
+        </button>
+    </div>
+</section>
+
+<div class="footer">
+    Volvé a abrir esta página cuando quieras. ♥
+</div>
+
 </main>
+
 <script>
-/*
-PERSONALIZACIÓN:
-Editá el objeto REGALO de abajo. Para fotos/videos/audio podés:
-- usar enlaces públicos (https://...) a archivos que ya estén alojados en internet; o
-- poner los archivos en la misma carpeta que este HTML y escribir sus nombres, por ejemplo "foto1.jpg".
-Si compartís este HTML suelto por QR, los archivos locales tienen que ir también en la carpeta/paquete o incrustarse en el HTML.
-*/
+
+/* ==========================================
+   PERSONALIZACIÓN DEL REGALO
+========================================== */
+
 const REGALO = {
-  para: "gorda",
-  titulo: "Un recuerdo<br>de las cosas que hicimos juntos",
-  subtitulo: "Te mereces todo lo mejor del mundo. ❤️",
-  portada: "", // Ejemplo: "portada.jpg" o URL pública
-  mensajeTitulo: "Te amo para siempre y me encanta esto que estamos construyendo juntos",
-  mensaje: "Bueno, quería hacerte un regalo distinto porque, si bien las cartas tienen tu magia, también me gusta la idea de que puedas leer algo así desde el celu y volver a hacerlo cada vez que quieras. Quiero que tengas siempre presente lo mucho que te amo y lo importante que sos para mí. Te amo muchísimo y sos lo mejor que me pasó en la vida. Quiero que seas la chica más feliz del mundo, y hacer todo lo que esté a mi alcance para verte sonreír y darte todo lo que te merecés, porque no hay nada que me haga más feliz que verte bien. Me encanta lo buena y alegre que sos, esa felicidad tan tuya que me contagia y que me hace explotar de ternura. Tenés una forma de ser que me enamora todos los días un poquito más, como tus gestos de mirar al costado cuando te reis, tus chistes, tus bromas y esa manera tan linda que tenés de mirarme y hacerme sentir. Me levanto y me acuesto pensando en vos. Sos ese pensamiento que me saca una sonrisa sin darme cuenta, esa persona con la que quiero compartir mis días, mis sueños, mis logros y hasta los momentos más simples de la vida. Nada me haría más feliz que pasar toda mi vida con vos, acompañarte en cada etapa, verte cumplir tus sueños, crecer juntos y seguir eligiéndonos cuando las cosas no sean tan fáciles. Me encanta que te sientas bien conmigo y que te guste cómo soy con vos, porque eso es lo que más feliz me hace: saber que te sentís querida, cuidada y valorada. Me hace inmensamente feliz saber que me querés como yo te quiero a vos, y ojalá nunca dejes de sentir todo el amor que tengo para darte. Quiero que siempre encuentres en mí un lugar donde puedas ser vos misma, donde te sientas tranquila, segura y acompañada, donde nunca tengas que dudar de lo importante que sos para mí. Nunca antes me sentí tan bien como me siento cuando estoy con vos. Me hacés sentir cosas que nunca había sentido, me das una felicidad que no sabía que podía existir y me hacés entender que cuando encontrás a alguien con quien realmente querés compartir la vida, hasta los días más comunes se vuelven especiales como cuando estamos en mi casa haciendo nada. No sé qué nos espera en el futuro ni cuántas cosas nos tocará vivir, pero sí sé algo: quiero vivirlas con vos. Quiero seguir conociéndote, seguir enamorándome de cada parte tuya, seguir creando recuerdos, riéndonos por cualquier pavada, abrazándonos fuerte y encontrando siempre motivos para estar juntos. Nunca perdamos esa magia que tenemos, esas ganas de vernos, de abrazarnos y de hacernos felices. Quiero cuidarte, respetarte, acompañarte y amarte de todas las maneras posibles. Y si hay algo que deseo de corazón es que, con el paso de los años, puedas mirar a tu lado y sentir que elegiste a alguien que nunca dejó de hacerte sentir amada. Te amo por lo que sos, por cómo me hacés sentir y por todo lo que somos cuando estamos juntos. Gracias por llegar a mi vida y hacerla muchísimo más linda. No cambiaría por nada todo lo que estamos construyendo. Te amo hoy, te voy a amar mañana y quiero seguir amándote por el resto de nuestras vidas. ❤️",
-  audios: ["audio1.ogg", "audio2.ogg", "audio3.ogg"], // Ejemplo: varios archivos .mp3, .ogg o URLs públicas
-  musicaLink: "", // enlace opcional a Spotify/YouTube
-  videos: [
-    "video1.mp4",
-    "video2.mp4",
-    "video3.mp4"
-  ],
-fotos: [
-    "./imagen1.png"
-],
-  encuestaTitulo: "¿Cuánto te acordás de nosotros?",
-  encuestaIntro: "Respondé estas preguntas. Al final te espera un premio especial. ♥",
-  preguntas: [
-    { pregunta: "¿Donde fue nuestro primer beso?", opciones: ["En el auto", "En el casino", "En el cine"], correcta: 0 },
-    { pregunta: "¿Que dia nos conocimos?", opciones: ["7 de septiembre", "13 de agosto", "15 de octubre"], correcta: 0 },
-    { pregunta: "¿Donde fue nuestro primer viaje?", opciones: ["Pinamar", "Villa Elisa", "Federación"], correcta: 1 }
-  ],
-  exigirTodasCorrectas: false, // true = el premio solo aparece con todas correctas
-  premioTitulo: "¡Ganaste gorda",
-  premioTexto: "Te amo demasiado. ❤️\n\n¿QUERES SER MI NOVIA?",
-  premioEmoji: "🎁",
-  premioImagen: "", // imagen opcional del premio
-  premioEnlace: "", // link opcional, por ejemplo a un video o una ubicación
-  textoBotonPremio: "Abrir mi sorpresa"
+
+    para: "gorda",
+
+    titulo: "Un recuerdo<br>de las cosas que hicimos juntos",
+
+    subtitulo: "Te mereces todo lo mejor del mundo. ❤️",
+
+    portada: "",
+
+    mensajeTitulo: "Te amo para siempre y me encanta esto que estamos construyendo juntos",
+
+    mensaje: `Bueno, quería hacerte un regalo distinto porque, si bien las cartas tienen tu magia, también me gusta la idea de que puedas leer algo así desde el celu y volver a hacerlo cada vez que quieras. Quiero que tengas siempre presente lo mucho que te amo y lo importante que sos para mí. Te amo muchísimo y sos lo mejor que me pasó en la vida. Quiero que seas la chica más feliz del mundo, y hacer todo lo que esté a mi alcance para verte sonreír y darte todo lo que te merecés, porque no hay nada que me haga más feliz que verte bien. Me encanta lo buena y alegre que sos, esa felicidad tan tuya que me contagia y que me hace explotar de ternura. Tenés una forma de ser que me enamora todos los días un poquito más, como tus gestos de mirar al costado cuando te reis, tus chistes, tus bromas y esa manera tan linda que tenés de mirarme y hacerme sentir. Me levanto y me acuesto pensando en vos. Sos ese pensamiento que me saca una sonrisa sin darme cuenta, esa persona con la que quiero compartir mis días, mis sueños, mis logros y hasta los momentos más simples de la vida. Nada me haría más feliz que pasar toda mi vida con vos, acompañarte en cada etapa, verte cumplir tus sueños, crecer juntos y seguir eligiéndonos cuando las cosas no sean tan fáciles. Me encanta que te sientas bien conmigo y que te guste cómo soy con vos, porque eso es lo que más feliz me hace: saber que te sentís querida, cuidada y valorada. Me hace inmensamente feliz saber que me querés como yo te quiero a vos, y ojalá nunca dejes de sentir todo el amor que tengo para darte. Quiero que siempre encuentres en mí un lugar donde puedas ser vos misma, donde te sientas tranquila, segura y acompañada, donde nunca tengas que dudar de lo importante que sos para mí. Nunca antes me sentí tan bien como me siento cuando estoy con vos. Me hacés sentir cosas que nunca había sentido, me das una felicidad que no sabía que podía existir y me hacés entender que cuando encontrás a alguien con quien realmente querés compartir la vida, hasta los días más comunes se vuelven especiales como cuando estamos en mi casa haciendo nada. No sé qué nos espera en el futuro ni cuántas cosas nos tocará vivir, pero sí sé algo: quiero vivirlas con vos. Quiero seguir conociéndote, seguir enamorándome de cada parte tuya, seguir creando recuerdos, riéndonos por cualquier pavada, abrazándonos fuerte y encontrando siempre motivos para estar juntos. Nunca perdamos esa magia que tenemos, esas ganas de vernos, de abrazarnos y de hacernos felices. Quiero cuidarte, respetarte, acompañarte y amarte de todas las maneras posibles. Y si hay algo que deseo de corazón es que, con el paso de los años, puedas mirar a tu lado y sentir que elegiste a alguien que nunca dejó de hacerte sentir amada. Te amo por lo que sos, por cómo me hacés sentir y por todo lo que somos cuando estamos juntos. Gracias por llegar a mi vida y hacerla muchísimo más linda. No cambiaría por nada todo lo que estamos construyendo. Te amo hoy, te voy a amar mañana y quiero seguir amándote por el resto de nuestras vidas. ❤️`,
+
+    audios: [
+        "audio1.ogg",
+        "audio2.ogg",
+        "audio3.ogg"
+    ],
+
+    musicaLink: "",
+
+    videos: [
+        "video1.mp4",
+        "video2.mp4",
+        "video3.mp4"
+    ],
+
+    fotos: [
+        "./imagen1.png"
+    ],
+
+    encuestaTitulo: "¿Cuánto te acordás de nosotros?",
+
+    encuestaIntro: "Respondé estas preguntas. Al final te espera un premio especial. ♥",
+
+    preguntas: [
+        {
+            pregunta: "¿Dónde fue nuestro primer beso?",
+            opciones: ["En el auto", "En el casino", "En el cine"],
+            correcta: 0
+        },
+        {
+            pregunta: "¿Qué día nos conocimos?",
+            opciones: ["7 de septiembre", "13 de agosto", "15 de octubre"],
+            correcta: 0
+        },
+        {
+            pregunta: "¿Dónde fue nuestro primer viaje?",
+            opciones: ["Pinamar", "Villa Elisa", "Federación"],
+            correcta: 1
+        }
+    ],
+
+    exigirTodasCorrectas: false,
+
+    premioTitulo: "¡Ganaste gorda!",
+
+    premioTexto: "Te amo demasiado. ❤️\n\n¿QUERÉS SER MI NOVIA?",
+
+    premioEmoji: "🎁",
+
+    premioImagen: "",
+
+    premioEnlace: "",
+
+    textoBotonPremio: "Abrir mi sorpresa"
+
 };
-const $=id=>document.getElementById(id);
-function setText(id,text){$(id).textContent=text||''}
-function mediaUrl(url){return String(url||'').trim()}
-function addMedia(el,tag,src){if(!src)return;const node=document.createElement(tag);node.src=src;node.controls=tag==='video'||tag==='audio';node.preload='metadata';node.setAttribute('playsinline','');node.setAttribute('aria-label',tag==='video'?'Video de recuerdo':'Audio de recuerdo');el.appendChild(node)}
-function init(){
- setText('toBadge','Espero que te guste '+(REGALO.para||'vos'));
- $('mainTitle').innerHTML=REGALO.titulo||'Un recuerdo para vos';
- setText('subtitle',REGALO.subtitulo);setText('messageTitle',REGALO.mensajeTitulo);setText('message',REGALO.mensaje);
- if(REGALO.portada){$('cover').src=REGALO.portada;$('cover').style.display='block'}
- if(REGALO.audios?.length||REGALO.musicaLink){
-  $('audioCard').classList.remove('hidden');
-  (REGALO.audios||[]).forEach((src,i)=>{
-   const title=document.createElement('p');
-   title.textContent='Audio '+(i+1);
-   title.style.margin='14px 0 5px';
-   $('audioArea').appendChild(title);
-   addMedia($('audioArea'),'audio',src);
-  });
-  if(REGALO.musicaLink){
-   const a=document.createElement('a');
-   a.href=REGALO.musicaLink;
-   a.target='_blank';
-   a.rel='noopener';
-   a.textContent='Abrir canción';
-   $('audioArea').appendChild(a);
-  }
- }
- if(REGALO.videos?.length){$('videoCard').classList.remove('hidden');REGALO.videos.forEach(src=>addMedia($('videoGallery'),'video',src))}
- if(REGALO.fotos?.length){$('photoCard').classList.remove('hidden');REGALO.fotos.forEach(src=>{const img=document.createElement('img');img.src=src;img.loading='lazy';img.alt='Foto de un recuerdo';$('photoGallery').appendChild(img)})}
- setText('quizTitle',REGALO.encuestaTitulo);setText('quizIntro',REGALO.encuestaIntro);
- const wrap=$('questions');
- REGALO.preguntas.forEach((q,i)=>{const block=document.createElement('div');block.className='question';const p=document.createElement('p');p.textContent=(i+1)+'. '+q.pregunta;block.appendChild(p);const answers=document.createElement('div');answers.className='answers';(q.opciones||[]).forEach((opt,j)=>{const label=document.createElement('label');label.className='answer';const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=j;const span=document.createElement('span');span.textContent=opt;label.append(radio,span);answers.appendChild(label)});block.appendChild(answers);wrap.appendChild(block)});
- $('progressBar').style.width='0%';
- if(REGALO.preguntas?.length)$('quizCard').classList.remove('hidden');else showPrize();
+
+
+/* ==========================================
+   FUNCIONES GENERALES
+========================================== */
+
+const $ = id => document.getElementById(id);
+
+function setText(id, text) {
+    $(id).textContent = text || "";
 }
-$('checkAnswers').addEventListener('click',()=>{
- const qs=REGALO.preguntas||[];let answered=0,correct=0;
- qs.forEach((q,i)=>{const selected=document.querySelector('input[name="q'+i+'"]:checked');if(selected){answered++;if(Number(selected.value)===Number(q.correcta))correct++}});
- $('progressBar').style.width=(qs.length?answered/qs.length*100:100)+'%';
- if(answered<qs.length){$('quizFeedback').textContent='Te falta responder '+(qs.length-answered)+' pregunta(s).';return}
- if(REGALO.exigirTodasCorrectas&&correct<qs.length){$('quizFeedback').textContent='¡Casi! Revisá tus respuestas y probá otra vez. ('+correct+'/'+qs.length+' correctas)';return}
- $('quizFeedback').textContent='¡Completaste la encuesta! Respuestas correctas: '+correct+' de '+qs.length+'.';
- showPrize();
+
+/*
+   Convierte las rutas relativas en direcciones
+   completas teniendo en cuenta GitHub Pages.
+*/
+
+function mediaUrl(src) {
+    return new URL(src, document.baseURI).href;
+}
+
+
+/* ==========================================
+   CARGA DE IMÁGENES
+========================================== */
+
+function addPhoto(src) {
+
+    const img = document.createElement("img");
+
+    const url = mediaUrl(src);
+
+    img.src = url;
+    img.alt = "Foto de un recuerdo";
+    img.loading = "lazy";
+
+    img.onerror = function() {
+
+        console.error("ERROR AL CARGAR LA IMAGEN:", url);
+
+        img.classList.add("image-error");
+
+        img.alt = "No se pudo cargar: " + src;
+
+        img.style.minHeight = "180px";
+
+        img.title = "No se encontró la imagen: " + url;
+
+    };
+
+    img.onload = function() {
+
+        console.log("Imagen cargada correctamente:", url);
+
+    };
+
+    $("photoGallery").appendChild(img);
+}
+
+
+/* ==========================================
+   CARGA DE AUDIO Y VIDEO
+========================================== */
+
+function addMedia(el, tag, src) {
+
+    if (!src) return;
+
+    const node = document.createElement(tag);
+
+    node.src = mediaUrl(src);
+
+    node.controls = true;
+
+    node.preload = "metadata";
+
+    node.setAttribute("playsinline", "");
+
+    node.setAttribute(
+        "aria-label",
+        tag === "video" ? "Video de recuerdo" : "Audio de recuerdo"
+    );
+
+    node.onerror = function() {
+        console.error("Error cargando archivo:", node.src);
+    };
+
+    el.appendChild(node);
+}
+
+
+/* ==========================================
+   INICIALIZACIÓN
+========================================== */
+
+function init() {
+
+    setText(
+        "toBadge",
+        "Espero que te guste " + (REGALO.para || "vos")
+    );
+
+    $("mainTitle").innerHTML = REGALO.titulo || "Un recuerdo para vos";
+
+    setText("subtitle", REGALO.subtitulo);
+
+    setText("messageTitle", REGALO.mensajeTitulo);
+
+    setText("message", REGALO.mensaje);
+
+
+    /* PORTADA */
+
+    if (REGALO.portada) {
+
+        $("cover").src = mediaUrl(REGALO.portada);
+
+        $("cover").style.display = "block";
+
+    }
+
+
+    /* AUDIOS */
+
+    if (REGALO.audios?.length || REGALO.musicaLink) {
+
+        $("audioCard").classList.remove("hidden");
+
+        (REGALO.audios || []).forEach((src, i) => {
+
+            const title = document.createElement("p");
+
+            title.textContent = "Audio " + (i + 1);
+
+            title.style.margin = "14px 0 5px";
+
+            $("audioArea").appendChild(title);
+
+            addMedia($("audioArea"), "audio", src);
+
+        });
+
+        if (REGALO.musicaLink) {
+
+            const a = document.createElement("a");
+
+            a.href = REGALO.musicaLink;
+
+            a.target = "_blank";
+
+            a.rel = "noopener";
+
+            a.textContent = "Abrir canción";
+
+            $("audioArea").appendChild(a);
+
+        }
+
+    }
+
+
+    /* VIDEOS */
+
+    if (REGALO.videos?.length) {
+
+        $("videoCard").classList.remove("hidden");
+
+        REGALO.videos.forEach(src => {
+
+            addMedia($("videoGallery"), "video", src);
+
+        });
+
+    }
+
+
+    /* FOTOGRAFÍAS */
+
+    if (REGALO.fotos?.length) {
+
+        $("photoCard").classList.remove("hidden");
+
+        REGALO.fotos.forEach(src => {
+
+            addPhoto(src);
+
+        });
+
+    }
+
+
+    /* ENCUESTA */
+
+    setText("quizTitle", REGALO.encuestaTitulo);
+
+    setText("quizIntro", REGALO.encuestaIntro);
+
+    const wrap = $("questions");
+
+    REGALO.preguntas.forEach((q, i) => {
+
+        const block = document.createElement("div");
+
+        block.className = "question";
+
+        const p = document.createElement("p");
+
+        p.textContent = (i + 1) + ". " + q.pregunta;
+
+        block.appendChild(p);
+
+        const answers = document.createElement("div");
+
+        answers.className = "answers";
+
+        (q.opciones || []).forEach((opt, j) => {
+
+            const label = document.createElement("label");
+
+            label.className = "answer";
+
+            const radio = document.createElement("input");
+
+            radio.type = "radio";
+
+            radio.name = "q" + i;
+
+            radio.value = j;
+
+            const span = document.createElement("span");
+
+            span.textContent = opt;
+
+            label.append(radio, span);
+
+            answers.appendChild(label);
+
+        });
+
+        block.appendChild(answers);
+
+        wrap.appendChild(block);
+
+    });
+
+    $("progressBar").style.width = "0%";
+
+    if (REGALO.preguntas?.length) {
+
+        $("quizCard").classList.remove("hidden");
+
+    } else {
+
+        showPrize();
+
+    }
+
+}
+
+
+/* ==========================================
+   CORRECCIÓN DE LA ENCUESTA
+========================================== */
+
+$("checkAnswers").addEventListener("click", () => {
+
+    const qs = REGALO.preguntas || [];
+
+    let answered = 0;
+
+    let correct = 0;
+
+    qs.forEach((q, i) => {
+
+        const selected = document.querySelector(
+            'input[name="q' + i + '"]:checked'
+        );
+
+        if (selected) {
+
+            answered++;
+
+            if (Number(selected.value) === Number(q.correcta)) {
+
+                correct++;
+
+            }
+
+        }
+
+    });
+
+    $("progressBar").style.width =
+        (qs.length ? answered / qs.length * 100 : 100) + "%";
+
+    if (answered < qs.length) {
+
+        $("quizFeedback").textContent =
+            "Te falta responder " + (qs.length - answered) + " pregunta(s).";
+
+        return;
+
+    }
+
+    if (REGALO.exigirTodasCorrectas && correct < qs.length) {
+
+        $("quizFeedback").textContent =
+            "¡Casi! Revisá tus respuestas y probá otra vez. (" +
+            correct + "/" + qs.length + " correctas)";
+
+        return;
+
+    }
+
+    $("quizFeedback").textContent =
+        "¡Completaste la encuesta! Respuestas correctas: " +
+        correct + " de " + qs.length + ".";
+
+    showPrize();
+
 });
-function showPrize(){
- $('prizeCard').classList.remove('hidden');setText('prizeTitle',REGALO.premioTitulo);setText('prizeText',REGALO.premioTexto);setText('prizeEmoji',REGALO.premioEmoji||'🎁');
- if(REGALO.premioImagen){const img=document.createElement('img');img.src=REGALO.premioImagen;img.alt='Tu premio';img.style.cssText='max-width:100%;max-height:320px;border-radius:14px;margin-top:15px';$('prizeMedia').appendChild(img)}
- if(REGALO.premioEnlace){$('prizeLink').classList.remove('hidden');$('prizeLink').textContent=REGALO.textoBotonPremio||'Abrir mi sorpresa';$('prizeLink').addEventListener('click',()=>window.open(REGALO.premioEnlace,'_blank','noopener'))}
- $('prizeCard').scrollIntoView({behavior:'smooth',block:'start'});
+
+
+/* ==========================================
+   MOSTRAR EL PREMIO
+========================================== */
+
+function showPrize() {
+
+    $("prizeCard").classList.remove("hidden");
+
+    setText("prizeTitle", REGALO.premioTitulo);
+
+    setText("prizeText", REGALO.premioTexto);
+
+    setText("prizeEmoji", REGALO.premioEmoji || "🎁");
+
+
+    if (REGALO.premioImagen) {
+
+        const img = document.createElement("img");
+
+        img.src = mediaUrl(REGALO.premioImagen);
+
+        img.alt = "Tu premio";
+
+        img.style.cssText =
+            "max-width:100%;max-height:320px;border-radius:14px;margin-top:15px";
+
+        img.onerror = function() {
+            console.error("Error cargando imagen del premio:", img.src);
+        };
+
+        $("prizeMedia").appendChild(img);
+
+    }
+
+
+    if (REGALO.premioEnlace) {
+
+        $("prizeLink").classList.remove("hidden");
+
+        $("prizeLink").textContent =
+            REGALO.textoBotonPremio || "Abrir mi sorpresa";
+
+        $("prizeLink").onclick = () => {
+
+            window.open(
+                REGALO.premioEnlace,
+                "_blank",
+                "noopener"
+            );
+
+        };
+
+    }
+
+    $("prizeCard").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
 }
+
+
+/* ==========================================
+   INICIAR PÁGINA
+========================================== */
+
 init();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
